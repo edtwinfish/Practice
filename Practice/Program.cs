@@ -11,8 +11,11 @@ namespace Practice
         static void Main()
         {
             Console.WriteLine("\n\nMENU \n-----------------\n");
+            //sort array practice methods
             Console.WriteLine("1 sortDogsArray\n");
             Console.WriteLine("2 sortAgeArray\n");
+            Console.WriteLine("3 sortBooksByTitle\n");
+            Console.WriteLine("4 sortBooksByAuthor\n");
             Console.WriteLine("0 Exit");
             Console.WriteLine("Please select the menu number to run!\n");
             var menu = Console.ReadLine();
@@ -27,6 +30,13 @@ namespace Practice
                     Console.WriteLine("sortAgeArray");
                     sortAgeArray();
                     break;
+                case "3":
+                    Console.WriteLine("sortBooksByTitle");
+                    sortBooksByTitle();
+                    break;
+                case "4":
+                    Console.WriteLine("sortBooksByAuthor");
+                    break;
                 case "0":                    
                     break;
             }; 
@@ -39,8 +49,7 @@ namespace Practice
         }
 
         public static void sortDogsArray()
-        {
-            //sort array
+        {            
             string[] dogs = { "abe", "charlie", "springer", "dodger" };
             Console.WriteLine("dogs: ");
             foreach (string dog in dogs)
@@ -99,6 +108,27 @@ namespace Practice
                 Console.WriteLine(age);
             }
 
+            Main();
+        }
+
+        public static void sortBooksByTitle()
+        {
+            List<Book> books = new List<Book>()
+            {
+                new Book("Twilight", "Stephanie Meyer"),
+                new Book("CarterOfMars", "Edgar Rice Burroughs"),
+                new Book("Harry Potter and the Sorcerers Stone", "J.K. Rowling")
+            };
+
+            IEnumerable<Book> booksByTitle =
+                from book in books
+                orderby book.Title
+                select book;
+
+            foreach(Book book in booksByTitle)
+            {
+                Console.WriteLine(book);
+            }
             Main();
         }
     }
