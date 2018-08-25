@@ -113,7 +113,7 @@ namespace Practice
 
         public static void sortBooksByTitle()
         {
-            List<Book> books = new List<Book>()
+            IList<Book> books = new List<Book>()
             {
                 new Book("Twilight", "Stephanie Meyer"),
                 new Book("CarterOfMars", "Edgar Rice Burroughs"),
