@@ -8,28 +8,8 @@ namespace Practice
 {
     public class Book
     {
-        public String Title
-        {
-            get
-            {
-                return this.Title;
-            }
-            set
-            {
-                this.Title = value;
-            }
-        }
-        public String Author
-        {
-            get
-            {
-                return this.Author;
-            }
-            set
-            {
-                this.Author = value;
-            }
-        }
+        public String Title { get; set; }
+        public String Author { get; set; }
 
         public Book(String title, String author)
         {

@@ -32,10 +32,7 @@ namespace Practice
                     break;
                 case "3":
                     Console.WriteLine("sortBooksByTitle");
-                    sortBooksByTitle();
-                    break;
-                case "4":
-                    Console.WriteLine("sortBooksByAuthor");
+                    sortBooks();
                     break;
                 case "0":                    
                     break;
@@ -111,23 +108,54 @@ namespace Practice
             Main();
         }
 
-        public static void sortBooksByTitle()
+        public static void sortBooks()
         {
-            IList<Book> books = new List<Book>()
+            List<Book> books = new List<Book>()
             {
                 new Book("Twilight", "Stephanie Meyer"),
                 new Book("CarterOfMars", "Edgar Rice Burroughs"),
                 new Book("Harry Potter and the Sorcerers Stone", "J.K. Rowling")
             };
+            Console.WriteLine("\nBooks before sort");
+            foreach(Book book in books)
+            {
+                Console.WriteLine(book.Title);
+            }
 
-            IEnumerable<Book> booksByTitle =
-                from book in books
-                orderby book.Title
-                select book;
-
-            foreach(Book book in booksByTitle)
+            IEnumerable<string> bookList = from book in books
+                                         orderby book.Title
+                                         select book.Title;
+            Console.WriteLine("\nBooks after sort");
+            foreach (string book in bookList)
             {
                 Console.WriteLine(book);
+            }
+
+            IEnumerable<string> bookListByAuthor = from book in books
+                                                   orderby book.Author
+                                                   select book.Author;
+            Console.WriteLine("\nBooks after sort by Author");
+            foreach (string book in bookListByAuthor)
+            {
+                Console.WriteLine(book);
+            }
+
+            IEnumerable<Book> bookListByTitleLambda =
+                books.OrderBy(b => b.Title);
+
+            Console.WriteLine("\nBooks after sort by title using Lambda");
+            foreach(Book book in bookListByTitleLambda)
+            {
+                Console.WriteLine(book.Title);
+            }
+
+            IEnumerable<Book> bookListByAuthorLambda =
+                books.OrderBy(b => b.Author);
+
+            Console.WriteLine("\nBooks after sort by author using Lambda");
+            foreach(Book book in bookListByAuthorLambda)
+            {
+                Console.WriteLine(book.Author);
             }
             Main();
         }
