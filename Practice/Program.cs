@@ -14,8 +14,9 @@ namespace Practice
             //sort array practice methods
             Console.WriteLine("1 sortDogsArray\n");
             Console.WriteLine("2 sortAgeArray\n");
-            Console.WriteLine("3 sortBooksByTitle\n");
-            Console.WriteLine("4 sortBooksByAuthor\n");
+            Console.WriteLine("3 sortBooks\n");
+            Console.WriteLine("4 selectBooks\n");
+            Console.WriteLine("5 selectFromArray\n");
             Console.WriteLine("0 Exit");
             Console.WriteLine("Please select the menu number to run!\n");
             var menu = Console.ReadLine();
@@ -33,6 +34,14 @@ namespace Practice
                 case "3":
                     Console.WriteLine("sortBooksByTitle");
                     sortBooks();
+                    break;
+                case "4":
+                    Console.WriteLine("selectBooks");
+                    selectBooks();
+                    break;
+                case "5":
+                    Console.WriteLine("selectFromArray");
+                    selectFromArray();
                     break;
                 case "0":                    
                     break;
@@ -76,7 +85,7 @@ namespace Practice
                 Console.WriteLine(dog);
             }
 
-            Main();
+            Console.ReadLine();
         }
 
         public static void sortAgeArray()
@@ -105,17 +114,12 @@ namespace Practice
                 Console.WriteLine(age);
             }
 
-            Main();
+            Console.ReadLine();
         }
 
         public static void sortBooks()
         {
-            List<Book> books = new List<Book>()
-            {
-                new Book("Twilight", "Stephanie Meyer"),
-                new Book("CarterOfMars", "Edgar Rice Burroughs"),
-                new Book("Harry Potter and the Sorcerers Stone", "J.K. Rowling")
-            };
+            List<Book> books = createBooks();
             Console.WriteLine("\nBooks before sort");
             foreach(Book book in books)
             {
@@ -157,7 +161,69 @@ namespace Practice
             {
                 Console.WriteLine(book.Author);
             }
-            Main();
+            Console.ReadLine();
+        }
+
+        public static void selectBooks()
+        {
+            List<Book> books = createBooks();
+
+            Console.WriteLine("\nselect Twilight from books");
+            IEnumerable<string> bookTwilight = books.Where(b => b.Title == "Twilight").Select(b => b.Title);
+            
+            foreach(string str in bookTwilight)
+            {
+                Console.WriteLine(str);
+            }
+
+            Console.WriteLine("\nselect Carter of Mars");
+            IEnumerable<string> bookCarter = books.Where(b => b.Title == "CarterOfMars").Select(b => b.Title);
+            foreach(string str in bookCarter)
+            {
+                Console.WriteLine(str);
+            }
+
+            Console.WriteLine("\nselect Twilight book");
+            IEnumerable<Book> bookTwilightTitle = books.Where(b => b.Title == "Twilight").Select(b => b);
+            foreach(Book book in bookTwilightTitle)
+            {
+                Console.WriteLine(book.Title);
+            }
+
+            Console.ReadLine();
+        }
+
+        public static List<Book> createBooks()
+        {
+            List<Book> books = new List<Book>()
+            {
+                new Book("Twilight", "Stephanie Meyer"),
+                new Book("CarterOfMars", "Edgar Rice Burroughs"),
+                new Book("Harry Potter and the Sorcerers Stone", "J.K. Rowling")
+            };
+            return books;
+        }
+
+        public static void selectFromArray()
+        {
+            string[] titles = { "Twilight", "John Carter Of Mars", "Star Wars" };
+            Console.WriteLine("select from string array");
+            IEnumerable<string> title = titles.Where(t => t == "John Carter Of Mars").Select(t => t);
+
+            foreach(string t in title)
+            {
+                Console.WriteLine(t);
+            }
+
+            int[] ages = { 7, 24, 2, 85, 93, 16 };
+            Console.WriteLine("select age from int array");
+            IEnumerable<int> age = ages.Where(a => a == 16).Select(a => a);
+            foreach(int a in age)
+            {
+                Console.WriteLine(a);
+            }
+
+            Console.ReadLine();
         }
     }
 }
